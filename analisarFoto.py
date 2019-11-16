@@ -5,18 +5,19 @@ import numpy as np
 from PIL import Image
 from HELPERS import Functions
 
-possibleChars = []
 
-# list of possible char groups
-listOfGroups = []
-
-# list of possible chars next to each other
-newGroup = []
-
-errorChance = 20
-
-colors = [(0,255,0),(0,0, 255),(255,0,0)]
 def analisarImagemBruto():
+    possibleChars = []
+
+    # list of possible char groups
+    listOfGroups = []
+
+    # list of possible chars next to each other
+    newGroup = []
+
+    errorChance = 20
+
+    colors = [(0,255,0),(0,0, 255),(255,0,0)]
     img = cv2.imread(sys.argv[1])
 
     maxRight = img.shape[1]
