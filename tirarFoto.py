@@ -16,7 +16,7 @@ def capturarEvento():
     
     #Verificando estado do botão
     if GPIO.input(pinButao):
-        cv2.imwrite("foi.jpg",frame)
+        cv2.imwrite("imagem.jpg", frame)
         return True #Caso verdadeiro, salva imagem e retorna True
 
     else:
