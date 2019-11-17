@@ -10,21 +10,18 @@ from HELPERS import Functions
 def analisarImagemBruto():
     possibleChars = []
 
-    # list of possible char groups
     listOfGroups = []
 
-    # list of possible chars next to each other
     newGroup = []
 
     errorChance = 20
 
     colors = [(0,255,0),(0,0, 255),(255,0,0)]
-    img = cv2.imread(sys.argv[1])
+    img = cv2.imread("imagem.jpg")
 
     maxRight = img.shape[1]
     maxBottom = img.shape[0]
 
-    #Converting to Gray Scale
     img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     img_gray = cv2.GaussianBlur(img_gray,(3,3),0)
@@ -99,7 +96,6 @@ def analisarImagemBruto():
             color = color + 1
 
 
-    # remove groups with length <= 1
     newListOfGroups = []
     for group in listOfGroups:
         if(len(group) > 1):
@@ -121,7 +117,6 @@ def analisarImagemBruto():
         else:
             color = color + 1
 
-    # reestructuring to array of group objects
     newListGroups = []
     for group in listOfGroups:
         top = 10000
@@ -171,14 +166,12 @@ def analisarImagemBruto():
     listOfGroups = newListGroups
 
 
-    # join groups
 
     joined = True
 
     aux = [ 0, 2 ]
 
     while joined == True:
-    # for a in aux:
         joined = False
         counter = 0
         newJoinGroup = []
@@ -211,10 +204,8 @@ def analisarImagemBruto():
                 listOfJoinGroups.append(newJoinGroup)
                 break
 
-            # cv2.rectangle(img, (group.left,group.top), (group.right,group.bottom), (0,0,255), 2)
 
 
-        # show joinend groups
 
         newListGroups = []
 
@@ -243,27 +234,22 @@ def analisarImagemBruto():
 
             newListGroups.append(groupObject)
 
-            # cv2.rectangle(img, (left,top), (right,bottom), (225,255,0), 2)
 
         listOfGroups = newListGroups
 
     newListOfGroups = []
 
-    # remove groups where no character found
     for group in listOfGroups:
 
         roi = thresh[group.top:group.bottom, group.left:group.right]
-        # cv2.rectangle(img, (group.left,group.top), (group.right,group.bottom), (255,0,255), 2)
-        # cv2.imshow("roi", roi)
 
         text = pytesseract.image_to_string(roi, config='-l eng')
         if(len(text) > 0):
-            # print text
             newListOfGroups.append(group)
 
     listOfGroups = newListOfGroups
 
-    # removing not possible plates
+
     newListOfGroups = []
 
     for group in listOfGroups:
@@ -275,7 +261,6 @@ def analisarImagemBruto():
     for group in listOfGroups:
         cv2.rectangle(img, (group.left,group.top), (group.right,group.bottom), (255,0,255), 2)
         roi = thresh[group.top:group.bottom, group.left:group.right]
-        # cv2.imshow("roi", roi)
 
 
         _, contours, hierarchy = cv2.findContours(roi, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -307,7 +292,6 @@ def analisarImagemBruto():
     x_offset = default_x_offset
     y_offset = 40
 
-    # if changing expectedHeight to 40, It will work for car3.jpg but It wll broke result for the other.
     expectedHeight = 60
     heightGap = 5
 
@@ -347,10 +331,6 @@ def analisarImagemBruto():
             plate_text = text
         else:
             expectedHeight -= heightGap
-
-    #cv2.imshow("Plate", np.array(plate))
-
-    #cv2.imshow('Car', img)
     return Functions.formatPlate(plate_text)
 
 def analisarImagem():
