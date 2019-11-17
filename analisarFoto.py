@@ -338,5 +338,3 @@ def analisarImagem():
         return analisarImagemBruto()
     except:
         return False
-
-print(analisarImagem())
