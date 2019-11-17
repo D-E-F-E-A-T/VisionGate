@@ -12,12 +12,13 @@ GPIO.setup(pinButao, GPIO.IN)
 video = cv2.VideoCapture(0)
 
 def capturarEvento():
+    estadoBotao = False
     #Pegando Status e Frame do vídeo
     ret, frame = video.read()
     #Verificando estado do botão
     if GPIO.input(pinButao):
         cv2.imwrite("imagem.jpg", frame)
-        return True #Caso verdadeiro, salva imagem e retorna True
+        return estadoBotao #Caso verdadeiro, salva imagem e retorna True
 
     else:
-        return False #Caso falso, retorna falso
+        return estadoBotao #Caso falso, retorna falso
