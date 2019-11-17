@@ -1,3 +1,4 @@
+#coding: utf-8
 import cv2
 import pytesseract
 import sys
@@ -30,7 +31,7 @@ def analisarImagemBruto():
 
     ret, thresh = cv2.threshold(img_gray, 120, 255, cv2.THRESH_BINARY)
 
-    contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    _,contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
     for contour in contours:
         possibleChar = Functions.possibleChar(contour)
@@ -277,7 +278,7 @@ def analisarImagemBruto():
         # cv2.imshow("roi", roi)
 
 
-    contours, hierarchy = cv2.findContours(roi, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+        _, contours, hierarchy = cv2.findContours(roi, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
     possibleChars = []
 
@@ -347,8 +348,6 @@ def analisarImagemBruto():
         else:
             expectedHeight -= heightGap
 
-    print("Car Plate: " + Functions.formatPlate(plate_text))
-
     #cv2.imshow("Plate", np.array(plate))
 
     #cv2.imshow('Car', img)
@@ -360,4 +359,4 @@ def analisarImagem():
     except:
         return False
 
-analisarImagemBruto()
+print(analisarImagem())
