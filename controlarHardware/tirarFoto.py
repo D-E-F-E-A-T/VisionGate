@@ -6,7 +6,10 @@ GPIO.setmode(GPIO.BOARD)
 
 #Definindo o pino 18 como entrada
 pinButao = 18
+pinLed = 11
+
 GPIO.setup(pinButao, GPIO.IN)
+GPIO.setup(pinLed, GPIO.OUT)
 
 #Iniciando WebCam
 video = cv2.VideoCapture("http://192.168.1.3:8081/")
@@ -24,3 +27,9 @@ def capturarEvento():
     else:
 	estadoBotao = False
         return estadoBotao #Caso falso, retorna falso
+
+def ligarLED():
+    GPIO.output(11, 1)
+
+def desligarLED():
+    GPIO.output(11, 0)
