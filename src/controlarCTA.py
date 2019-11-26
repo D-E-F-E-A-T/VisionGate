@@ -1,11 +1,15 @@
+#coding: utf-8
 from funcoesMQTT import escutar
 from eventosHardware import ligarLED
 from eventosHardware import desligarLED
+
 mensagem = escutar()
 
+print(mensagem)
 if mensagem == "abrir":
     ligarLED()
     #seja bem vindo
+
 elif mensagem == "BDok":
     ligarLED()
     #seja bem vindo <nome>

@@ -3,7 +3,7 @@ import RPi.GPIO as GPIO
 import cv2
 
 GPIO.setmode(GPIO.BOARD)
-
+GPIO.setwarnings(False)
 #Definindo o pino 18 como entrada
 pinButao = 18
 pinLed = 11
