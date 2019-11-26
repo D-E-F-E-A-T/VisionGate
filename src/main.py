@@ -1,6 +1,6 @@
 #coding: utf-8
 from processamentoImagem.analisarFoto import analisarImagem
-from controlarHardware.tirarFoto import *
+from controlarHardware.eventosHardware import *
 
 i = 1
 while i >= 1:

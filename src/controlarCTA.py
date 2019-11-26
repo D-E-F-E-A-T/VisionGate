@@ -1,7 +1,6 @@
 from funcoesMQTT import escutar
-from ../controlarHardware.tirarFoto import ligarLED
-from ../controlarHardware.tirarFoto import desligarLED
-
+from controlarHardware.eventosHardware import ligarLED
+from controlarHardware.eventosHardware import desligarLED
 mensagem = escutar()
 
 if mensagem == "abrir":
